@@ -46,7 +46,7 @@ class RepositoryController extends Controller
      */
     public function edit(Repository $repository)
     {
-        return Inertia::render('',compact($repository));
+        return Inertia::render('',compact($repository));  
     }
 
     /**
