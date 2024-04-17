@@ -28,5 +28,20 @@ Route::get('/home', function () {
     return Inertia::render('Home');
 })->name('home');
 
+Route::get('/admin/dashboard', function () {
+    return Inertia::render('Admin/Dashboard');
+});
+Route::get('/admin/students', function () {
+    return Inertia::render('Admin/Students');
+});
+Route::get('/admin/teachers', function () {
+    return Inertia::render('Admin/Teachers');
+});
+Route::get('/admin/users', function () {
+    return Inertia::render('Admin/Users');
+});
+Route::get('/students/profile', function () {
+    return Inertia::render('Students/Profile');
+});
 
 require __DIR__ . '/auth.php';
