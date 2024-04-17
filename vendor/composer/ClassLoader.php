@@ -105,6 +105,7 @@ class ClassLoader
 
     /**
      * @param ?string $vendorDir
+
      */
     public function __construct($vendorDir = null)
     {
@@ -181,7 +182,7 @@ class ClassLoader
      *
      * @param string          $prefix  The prefix
      * @param string[]|string $paths   The PSR-0 root directories
-     * @param bool            $prepend Whether to prepend the directories
+     * @param bool            $pre
      *
      * @return void
      */
