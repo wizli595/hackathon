@@ -1,24 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer tailwind-base, primereact, tailwind-utilities;
 
-@keyframes flash {
-    0% {
-        border-bottom: 2px solid green;
-        border-width: 100%;
-    }
+/* IMPORTANT: In "styled" mode you must add the PrimeReact Theme here. Do NOT include in "unstyled" mode */
+@import 'primereact/resources/themes/lara-light-blue/theme.css' layer(primereact);
 
-    50% {
-        border-bottom: 2px solid red;
-        border-width: 50%;
-    }
-
-    100% {
-        border-bottom: 2px solid red;
-        border-width: 0%;
-    }
+@layer tailwind-base {
+    @tailwind base;
 }
 
-.sssss {
-    animation: flash 5s ease;
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
 }
