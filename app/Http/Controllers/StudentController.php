@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Http\Controllers\Controller;
+use App\Models\Repository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class StudentController extends Controller
 {
@@ -13,7 +16,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $repos = Repository::where('id',Auth::id());
+
+        return Inertia::render('',compact($repos));
     }
 
     /**
@@ -37,7 +42,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return Inertia::render('',compact($student));
     }
 
     /**
@@ -45,7 +50,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return Inertia::render('',compact($student));
     }
 
     /**
@@ -53,7 +58,15 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'username' => 'string|required'
+        ]);
+
+        $student->update([
+            'username' => $request->username
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -61,6 +74,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+
+        return redirect()->back();
     }
 }

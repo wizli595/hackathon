@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TeacherController extends Controller
 {
@@ -13,7 +15,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+
+        return Inertia::render('',compact('students'));
     }
 
     /**
@@ -21,7 +25,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -29,7 +33,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -37,7 +41,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+        return Inertia::render('',compact($teacher));
     }
 
     /**
@@ -45,7 +49,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        return Inertia::render('',compact($teacher));
     }
 
     /**
@@ -53,7 +57,15 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $request->validate([
+            'name' => 'string|required'
+        ]);
+
+        $teacher->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -61,6 +73,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+
+        return redirect()->back();
     }
 }

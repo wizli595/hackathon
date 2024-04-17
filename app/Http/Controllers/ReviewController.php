@@ -7,6 +7,7 @@ use App\Models\Review;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ReviewController extends Controller
 {
@@ -32,11 +33,11 @@ class ReviewController extends Controller
     public function store(Request $request, Repository $repository)
     {
         $request->validate([
-            'comment' => 'string'
+            'comment' => 'string|required'
         ]);
 
         Review::create([
-            'teacher_id' => Auth::user()->id,
+            'teacher_id' => Auth::id(),
             'repository_id' => $repository->id,
             'comment' => $request->comment
         ]);
@@ -57,7 +58,7 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        abort(404);
+        return Inertia::render('',compact($review));
     }
 
     /**
@@ -66,10 +67,10 @@ class ReviewController extends Controller
     public function update(Request $request, Review $review)
     {
         $request->validate([
-            'comment' => 'string'
+            'comment' => 'string|required'
         ]);
 
-        Review::findOrFail($review)->update([
+        $review->update([
             'comment' => $request->comment
         ]);
 
@@ -81,7 +82,7 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        Review::findOrFail($review)->delete();
+        $review->delete();
 
         return redirect()->back();
     }

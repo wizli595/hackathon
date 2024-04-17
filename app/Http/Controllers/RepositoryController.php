@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Repository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class RepositoryController extends Controller
 {
@@ -37,7 +38,7 @@ class RepositoryController extends Controller
      */
     public function show(Repository $repository)
     {
-        //
+        return Inertia::render('',compact($repository));
     }
 
     /**
@@ -45,7 +46,7 @@ class RepositoryController extends Controller
      */
     public function edit(Repository $repository)
     {
-        //
+        return Inertia::render('',compact($repository));
     }
 
     /**
